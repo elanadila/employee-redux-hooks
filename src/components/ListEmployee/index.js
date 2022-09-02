@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react'
+import { Container, Button } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { detailEmployee, addEmployee, deleteEmployee, getListEmployee } from '../../actions/employeeAction';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
+
 
 function ListEmployee() {
 
@@ -26,6 +30,8 @@ function ListEmployee() {
 
   return (
     <div>
+    
+    <Container>
         <h4> List Employee</h4>
         { getListEmployeeResult ? (
             getListEmployeeResult.map((employee) => {
@@ -37,8 +43,12 @@ function ListEmployee() {
                         {employee.street} - 
                         {employee.current_position} - 
                         {employee.ktp_number} -
-                        <button onClick={ () => dispatch(deleteEmployee(employee.id)) }>Hapus</button>
-                        <button style={{ marginLeft: '10px'}} onClick={ () => dispatch(detailEmployee(employee)) }>Edit</button>
+                        <Button color="warning" onClick={ () => dispatch(detailEmployee(employee)) } className="ms-2">
+                          <FontAwesomeIcon icon={faEdit} /> Edit
+                        </Button>
+                        <Button color="danger" onClick={ () => dispatch(deleteEmployee(employee.id)) } className="ms-2">
+                          <FontAwesomeIcon icon={faTrash} /> Hapus
+                        </Button>
                     </p>
                 )
             })
@@ -48,6 +58,7 @@ function ListEmployee() {
             <p>{getListEmployeeError ? getListEmployeeError : "Data Kosong"}</p>
         )}
         
+    </Container>
     </div>
   )
 }

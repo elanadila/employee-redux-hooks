@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { addEmployee, getListEmployee, updateEmployee } from "../../actions/employeeAction"
+import { Container, Button } from 'reactstrap';
 
 function AddEmployee() {
     const [last_name, setNama]= useState("");
@@ -67,7 +68,7 @@ function AddEmployee() {
     }, [updateEmployeeResult, dispatch])
 
     return (
-    <div>
+    <Container>
         <h4>{id ? "Edit Employee " : "Add Employee"}</h4>
         <form onSubmit={(event)=> handleSubmit(event)}>
 
@@ -89,9 +90,12 @@ function AddEmployee() {
             <input style={{ marginLeft: '10px'}} type="text" name="ktp_number" placeholder="KTP Number . . . " value={ktp_number} 
             onChange={(event)=>setKTP(event.target.value)}/>
 
-            <button type="submit">Submit</button>
+            <Button type="submit" color="info" className="ms-2">
+                Submit
+            </Button>   
+
         </form>
-    </div>
+    </Container>
   )
 }
 
